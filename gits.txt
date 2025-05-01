@@ -5,12 +5,15 @@ git config --global core.editor <"code name(path) --wait">
 git config --global -e (opens the file for editing in the previously configured code editor)
 git config --global core.autocrlf true
 git config --help
+
 git init
+
 git status
 git add <name1> / <name1> <name2>
 git add *.txt
 git add .
 git commit (opens default editor for message)
 git commit -m "Initial commit"
+git commit -a (all)
+git commit -am <"message">
 
-echo <word> > <filename>
