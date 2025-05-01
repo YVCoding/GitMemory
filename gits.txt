@@ -5,7 +5,10 @@ git config --global core.editor <"code name(path) --wait">
 git config --global -e (opens the file for editing in the previously configured code editor)
 git config --global core.autocrlf true
 git config --help
-
+git config --global diff.tool vscode(naming)
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+(vscode [code] will be the tool for checking difference when using git)
+(check git config --global -e to see if $LOCAL $REMOTE are there, if not add them)
 git init
 
 git status
@@ -28,7 +31,13 @@ git rm -r --cached -r <name>(for recursively removing)
 
 git ls-files
 git ls-files --cached
+git diff
 git diff --staged
+git difftool
+git difftool --staged
+git log(q to quit)
+git log --oneline
+git log --oneline --reverse
 
 ls
 mv
