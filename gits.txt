@@ -10,5 +10,7 @@ git status
 git add <name1> / <name1> <name2>
 git add *.txt
 git add .
+git commit (opens default editor for message)
+git commit -m "Initial commit"
 
 echo <word> > <filename>
