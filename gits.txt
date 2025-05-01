@@ -24,13 +24,11 @@ git mv <File_name1 File_name2>
 git rm -r --cached .
 git rm -r --cached -r <name>(for recursively removing)
 
-.
 
 
 git ls-files
 git ls-files --cached
 git diff --staged
-
 
 ls
 mv
