@@ -1,0 +1,14 @@
+// configs
+git config --global user.name <"name">
+git config --global user.email <email>
+git config --global core.editor <"code name(path) --wait">
+git config --global -e (opens the file for editing in the previously configured code editor)
+git config --global core.autocrlf true
+git config --help
+git init
+git status
+git add <name1> / <name1> <name2>
+git add *.txt
+git add .
+
+echo <word> > <filename>
