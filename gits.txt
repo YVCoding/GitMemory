@@ -14,6 +14,9 @@ git add *.txt
 git add .
 git commit (opens default editor for message)
 git commit -m "Initial commit"
-git commit -a (all)
+git commit -a (all, all modified, without using staging)
 git commit -am <"message">
 
+
+
+git ls-files
