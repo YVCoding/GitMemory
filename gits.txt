@@ -19,7 +19,13 @@ git commit (opens default editor for message)
 git commit -m "Initial commit"
 git commit -a (all, all modified, without using staging)
 git commit -am <"message">
+git mv <File_name1 <File_name2>
 
 
 
 git ls-files
+
+
+ls
+mv
+rm
