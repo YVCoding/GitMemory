@@ -9,6 +9,7 @@ git config --help
 git init
 
 git status
+git status -s
 git add <name1> / <name1> <name2>
 git add *.txt
 git add .
@@ -20,12 +21,19 @@ git commit -m "Initial commit"
 git commit -a (all, all modified, without using staging)
 git commit -am <"message">
 git mv <File_name1 File_name2>
+git rm -r --cached .
+git rm -r --cached -r <name>(for recursively removing)
 
+.
 
 
 git ls-files
+git ls-files --cached
+git diff --staged
 
 
 ls
 mv
 rm
+
+github.com/github/gitignore (a website that tells you what to ignore)
