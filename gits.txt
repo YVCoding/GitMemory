@@ -31,6 +31,7 @@ git rm -r --cached -r <name>(for recursively removing)
 
 git ls-files
 git ls-files --cached
+git ls-tree HEAD/~1..
 git diff
 git diff --staged
 git difftool
@@ -38,6 +39,7 @@ git difftool --staged
 git log(q to quit)
 git log --oneline
 git log --oneline --reverse
+git show / HEAD / HEAD~<number> / HEAD~<number>:<file name>
 
 ls
 mv
