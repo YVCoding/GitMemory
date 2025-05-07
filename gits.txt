@@ -11,35 +11,53 @@ git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
 (check git config --global -e to see if $LOCAL $REMOTE are there, if not add them)
 git init
 
-git status
-git status -s
+
+______________________________________________________________________________________________________________
+
 git add <name1> / <name1> <name2>
 git add *.txt
 git add .
+git mv <File_name1 File_name2>
+
 git rm <name1> / <name1> <name2>
 git rm *.txt
 git rm .
+git rm -r --cached .
+git rm -r --cached -r <name>(for recursively removing)
+
 git commit (opens default editor for message)
 git commit -m "Initial commit"
 git commit -a (all, all modified, without using staging)
 git commit -am <"message">
-git mv <File_name1 File_name2>
-git rm -r --cached .
-git rm -r --cached -r <name>(for recursively removing)
+
+git restore --staged <file name / names  / *.<type> / .>
+git restore .
+git restore --source=HEAD ~<NUMBER> / <file name / names  / *.<type> / .>
+
+git clean
+git clean -fd
 
 
+____________________________________________________________________________________________________________________
+
+git status
+git status -s
 
 git ls-files
 git ls-files --cached
 git ls-tree HEAD/~1..
+
 git diff
 git diff --staged
 git difftool
 git difftool --staged
+
 git log(q to quit)
 git log --oneline
 git log --oneline --reverse
 git show / HEAD / HEAD~<number> / HEAD~<number>:<file name>
+
+____________________________________________________________________________________________________________________
 
 ls
 mv
