@@ -7,6 +7,10 @@ git config --global core.autocrlf true
 git config --help
 git config --global diff.tool vscode(naming)
 git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+
+git config --global alias.lg " log --pretty=format:format:'%Cpurple%an%Creset %Cpink%h%Creset %Cgreen%cd%Creset'"
+git config --global alias.unstage "restore --staged ."
+
 (vscode [code] will be the tool for checking difference when using git)
 (check git config --global -e to see if $LOCAL $REMOTE are there, if not add them)
 git init
@@ -37,6 +41,10 @@ git restore --source=HEAD ~<NUMBER> / <file name / names  / *.<type> / .>
 git clean
 git clean -fd
 
+git checkout <commit ID> / <branch name> / <tag name>
+git checkout <commit ID> <file name> ( to add a deleted file)
+
+git bisect start => git bisect bad => git bisect good <commit id> => git bisect good / bad => git bisect reset
 
 ____________________________________________________________________________________________________________________
 
@@ -48,14 +56,41 @@ git ls-files --cached
 git ls-tree HEAD/~1..
 
 git diff
+git diff HEAD~<number> HEAD / <file name> / --name-only /..
 git diff --staged
 git difftool
 git difftool --staged
 
 git log(q to quit)
+git log <file name> / --stat <file name> / --patch <file name>
 git log --oneline
+git log --oneline -all
+git log --oneline -3
+git log --oneline --after="<year-mt-dy> / yesterday / x day/s/week/s ago"
+git log --oneline --author="<name>"
+git log --oneline --grep="<content>"
+git log --oneline --S"<file_content(for functions)>"
+git log --oneline --S"<file_content(for functions)>" --patch
 git log --oneline --reverse
-git show / HEAD / HEAD~<number> / HEAD~<number>:<file name>
+git log --oneline --stat
+git log --oneline --patch
+git log --oneline -- <file name>
+git log --oneline --patch -- <file name>
+git log --oneline <commit's identifier>..<commit's ID>
+git log --pretty=format:"%an / %h / %cd"
+git log --pretty=format:"%Cgreen%an%Creset %Cred%h%Creset %Cblue%cd%Creset"
+
+git shortlog -n /+ -s /+ -e /+ --before="" / --after=""
+
+git blame  / -e / L <line number>,<line number> <file name>
+
+git tag <name> <commit id>
+git tag -a <name> -m "<message>"
+git tag
+git tag -d <tag name>
+
+git show / <tag name> / HEAD / HEAD~<number>/ HEAD~<number>:<file name> / HEAD~<number> --name-only / HEAD~<number> --name-status / HEAD~<number>:<file name>
+
 
 ____________________________________________________________________________________________________________________
 
