@@ -8,7 +8,8 @@ git config --help
 git config --global diff.tool vscode(naming)
 git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
 
-git config --global alias.lg " log --pretty=format:format:'%Cpurple%an%Creset %Cpink%h%Creset %Cgreen%cd%Creset'"
+git config --global alias.lg " log --pretty=format:format:'%Cpurple%an%Creset %Cpink%h%Creset %Cgreen%cd%Creset'
+"
 git config --global alias.unstage "restore --staged ."
 
 (vscode [code] will be the tool for checking difference when using git)
