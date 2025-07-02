@@ -39,6 +39,7 @@ git commit -am <"message">
 
 git restore --staged <file name / names  / *.<type> / .>
 git restore .
+git restore --source=< -- > file name / names  / *.<type> / .>
 git restore --source=HEAD ~<NUMBER> / <file name / names  / *.<type> / .>
 
 git clean
@@ -70,6 +71,8 @@ git merge <branch-name>
 git merge --no-ff <branch-name>
 git merge --abort
 git merge --squash <name>
+
+git cherry-pick <commit's id>
 
 git rebase <name>
 git rebase --continue
@@ -141,5 +144,6 @@ ________________________________________________________________________________
 ls
 mv
 rm
+cat <filename> (Watch the content of the file)
 
 github.com/github/gitignore (a website that tells you what to ignore)
