@@ -17,6 +17,8 @@ git config --global alias.unstage "restore --staged ."
 git config ff no
 git config --global ff no
 
+git mergetool
+
 
 
 _______________________________________________________________________________________________________________
@@ -61,6 +63,7 @@ git commit (opens default editor for message)
 git commit -m "Initial commit"
 git commit -a (all, all modified, without using staging)
 git commit -am <"message">
+git commit --amend (-m)
 
 git restore --staged <file name / names  / *.<type> / .>
 git restore .
@@ -103,14 +106,22 @@ git rebase <name>
 git rebase --continue
 git rebase --skip   
 git rebase --abort
+git rebase -i <commit id>(^ / ~<number>)
 
 git reset --<soft/mixed/hard> HEAD~<NUMBER>
 git reset --<soft/mixed/hard> <commit's id>
+git reset --<soft/mixed/hard> <entry id / commit id> (for undo bad commit reset)
+
 
 git revert -m 1 HEAD
 git revert HEAD~1..HEAD
 git revert --abort
 git revort --continue
+
+git reflog
+
+git reflog shot <branch name>
+
 
 
 git bisect start => git bisect bad => git bisect good <commit id> => git bisect good / bad => git bisect reset
@@ -174,3 +185,201 @@ rm
 cat <filename> (Watch the content of the file)
 
 github.com/github/gitignore (a website that tells you what to ignore)
+
+rebase actions [drop(or simply delete the commit line), pick, edit, reword, squash/fixup(only main message)]
+
+
+
+
+
+
+
+ grok's explanation:
+
+
+
+// Git configuration commands
+git config --global user.name <"name">                    // Sets the global username for Git commits
+git config --global user.email <email>                    // Sets the global email address for Git commits
+git config --global core.editor <"code name(path) --wait"> // Sets the default text editor for Git (e.g., VS Code with --wait)
+git config --global -e                                    // Opens the global Git config file in the configured editor
+git config --global core.autocrlf true                    // Converts line endings to CRLF on checkout and LF on commit
+git config --help                                         // Displays help documentation for git config
+git config --global diff.tool vscode                      // Sets VS Code as the default diff tool (named "vscode")
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE" // Configures VS Code for diff comparisons
+// (Note: Check git config --global -e to ensure $LOCAL and $REMOTE are present; add if missing)
+
+git init                                                  // Initializes a new Git repository in the current directory
+
+git config --global alias.lg "log --pretty=format:'%Cpurple%an%Creset %Cpink%h%Creset %Cgreen%cd%Creset'" // Custom alias for formatted log output
+git config --global alias.unstage "restore --staged ."    // Alias to unstage all changes in the current directory
+
+git config ff no                                          // Disables fast-forward merges for the current repository
+git config --global ff no                                 // Disables fast-forward merges globally
+
+git mergetool                                             // Launches the configured merge tool to resolve conflicts
+
+_______________________________________________________________________________________________________________
+
+// Git remote and cloning commands
+git clone <source> ( <new name> )                         // Clones a repository from a URL, optionally renaming it
+git remote                                                // Lists all remote repositories
+git remote -v                                             // Lists remote repositories with fetch/push URLs
+git remote prune <repo name>                              // Removes stale branches from the specified remote
+git remote add <name(upstream?)>                          // Adds a new remote repository (e.g., "upstream")
+git remote rename <old name> <new name>                   // Renames an existing remote repository
+git remote rm <name>                                      // Removes the specified remote repository
+
+git fetch (origin [branch <branch name>])                 // Downloads objects and refs from a remote (or specific branch)
+git pull                                                  // Fetches and merges changes from the remote branch
+git pull --rebase                                         // Fetches and rebases the current branch on the remote
+
+git push (repo(origin) [<branch name>])                   // Pushes local commits to the specified remote/branch
+git push (repo(origin) [<branch name>]) <tag name>        // Pushes a tag to the remote repository
+git push (repo(origin) [<branch name>]) --delete <tag name> // Deletes a tag from the remote repository
+git push -u (repo(origin) [<branch name>])                // Pushes and sets upstream tracking for the branch
+git push -d (repo(origin) [<branch name>])                // Deletes the specified branch from the remote
+
+// Branch management commands
+git branch -vv                                            // Lists local branches with verbose tracking details
+git branch -r                                             // Lists all remote branches
+
+git add <name1> / <name1> <name2>                        // Stages specified file(s) for the next commit
+git add *.txt                                             // Stages all .txt files in the current directory
+git add .                                                 // Stages all changes in the current directory
+git mv <File_name1 File_name2>                            // Renames or moves a file and stages the change
+
+git rm <name1> / <name1> <name2>                         // Removes specified file(s) and stages the deletion
+git rm *.txt                                              // Removes all .txt files and stages the deletion
+git rm .                                                  // Removes all tracked files in the current directory
+git rm -r --cached .                                      // Untracks all files but keeps them locally
+git rm -r --cached -r <name>                              // Untracks files recursively in the specified directory
+
+git commit                                                // Opens the default editor for a commit message
+git commit -m "Initial commit"                            // Commits staged changes with a message
+git commit -a                                             // Stages and commits all modified/deleted tracked files
+git commit -am <"message">                                // Stages all changes and commits with a message
+git commit --amend (-m)                                   // Modifies the most recent commit, optionally its message
+
+git restore --staged <file name / names  / *.<type> / .>  // Unstages specified file(s) or all staged changes
+git restore .                                             // Discards all uncommitted changes in the working directory
+git restore --source=< -- > file name / names  / *.<type> / .> // Restores file(s) to a specific state
+git restore --source=HEAD ~<NUMBER> / <file name / names  / *.<type> / .> // Restores file(s) from a commit relative to HEAD
+
+git clean                                                 // Removes untracked files (dry run)
+git clean -fd                                             // Forcefully removes untracked files and directories
+
+git checkout <commit ID> / <branch name> / <tag name>     // Switches to a commit, branch, or tag
+git checkout <commit ID> <file name>                      // Restores a file from a specific commit
+
+git branch <branch-name>                                  // Creates a new branch
+git branch                                                // Lists all local branches
+git switch <branch name>                                  // Switches to the specified branch
+git switch -C <branch name>                               // Creates and switches to a new branch
+git branch -m <branch name> <new branch name>             // Renames a branch
+git branch -d <branch name>                               // Deletes a fully merged branch
+git branch -D <branch name>                               // Forcefully deletes a branch
+git branch --merged                                       // Lists branches merged into the current branch
+git branch --no-merged                                    // Lists branches not merged into the current branch
+
+git stash push -am "<message>"                            // Stages and stashes all changes with a message
+git stash push -m "<message>"                             // Stashes only staged changes with a message
+git stash list                                            // Lists all stashed changes
+git stash show <number>                                   // Shows changes in the specified stash
+git stash apply <number>                                  // Applies the specified stash to the working directory
+git stash drop <number>                                   // Deletes the specified stash
+git stash clear                                           // Deletes all stashes
+
+git merge <branch-name>                                   // Merges the specified branch into the current branch
+git merge --no-ff <branch-name>                           // Merges without fast-forwarding, creating a merge commit
+git merge --abort                                         // Aborts the current merge operation
+git merge --squash <name>                                 // Combines branch changes into a single commit
+
+git cherry-pick <commit's id>                             // Applies changes from a specific commit to the current branch
+
+git rebase <name>                                         // Reapplies commits onto the specified branch
+git rebase --continue                                     // Continues a rebase after resolving conflicts
+git rebase --skip                                         // Skips the current commit during rebase
+git rebase --abort                                        // Aborts the current rebase
+git rebase -i <commit id>(^ / ~<number>)                  // Starts an interactive rebase from a commit
+
+git reset --<soft/mixed/hard> HEAD~<NUMBER>               // Resets to a previous commit (soft: keeps changes, mixed: unstages, hard: discards)
+git reset --<soft/mixed/hard> <commit's id>               // Resets to a specific commit
+git reset --<soft/mixed/hard> <entry id / commit id>      // Resets a specific commit or entry
+
+git revert -m 1 HEAD                                      // Creates a commit undoing the most recent commit
+git revert HEAD~1..HEAD                                   // Reverts a range of commits
+git revert --abort                                        // Aborts the current revert operation
+git revert --continue                                     // Continues a revert after resolving conflicts
+
+git reflog                                                // Shows a log of reference changes (e.g., commits, resets)
+git reflog show <branch name>                             // Shows reflog for a specific branch
+
+git bisect start                                          // Starts a binary search to find a buggy commit
+git bisect bad                                            // Marks the current commit as bad
+git bisect good <commit id>                               // Marks a specific commit as good
+git bisect good / bad                                     // Marks subsequent commits as good or bad
+git bisect reset                                          // Ends bisect and returns to the original state
+
+____________________________________________________________________________________________________________________
+
+// Git status and file inspection commands
+git status                                                // Shows the current working directory and staging status
+git status -s                                             // Shows a concise status output
+git ls-files                                              // Lists all tracked files
+git ls-files --cached                                     // Lists files in the index (staged)
+git ls-tree HEAD/~1..                                     // Lists the file tree for a commit range
+
+git diff                                                  // Shows changes between working directory and index
+git diff HEAD~<number> HEAD / <file name> / --name-only /.. // Shows changes between commits, optionally for a file or names
+git diff --staged                                         // Shows changes in the staged area
+git diff <branch>..<branch>                               // Compares changes between two branches
+git diff <branch>                                         // Shows differences with the specified branch
+git diff --name-only/name-status <branch name>            // Shows file names or status changed in a branch
+git difftool                                              // Opens the configured diff tool
+git difftool --staged                                     // Opens diff tool for staged changes
+
+git log                                                   // Shows commit history (press 'q' to quit)
+git log <file name> / --stat <file name> / --patch <file name> // Shows commit history for a file, with stats or patches
+git log --oneline                                         // Shows commit history in one-line format
+git log --oneline --all                                   // Shows all branches in one-line format
+git log --oneline --all --graph                           // Shows a graphical commit history
+git log --oneline --3                                     // Shows the last 3 commits
+git log --oneline --after="<year-mt-dy> / yesterday / x day/s/week/s ago" // Filters commits after a date
+git log --oneline --author="<name>"                       // Filters commits by author
+git log --oneline --grep="<content>"                      // Filters commits by message content
+git log --oneline --S"<file_content(for functions)>"      // Searches for commits changing specific content
+git log --oneline --S"<file_content(for functions)>" --patch // Shows content changes with patches
+git log --oneline --reverse                               // Shows commit history in reverse order
+git log --oneline --stat                                  // Shows commit history with file stats
+git log --oneline --patch                                 // Shows commit history with patch details
+git log --oneline -- <file name>                          // Shows commit history for a file
+git log --oneline --patch -- <file name>                  // Shows file commit history with patches
+git log --oneline <commit's identifier>..<commit's ID>    // Shows commits between two commits
+git log --pretty=format:"%an / %h / %cd"                  // Formats log with author, hash, and date
+git log --pretty=format:"%Cgreen%an%Creset %Cred%h%Creset %Cblue%cd%Creset" // Formats log with colored output
+git log <branch>..<branch>                                // Shows commits between two branches
+
+git shortlog -n /+ -s /+ -e /+ --before="" / --after=""   // Summarizes commits by author with sorting, counts, emails, or date filters
+git blame / -e / L <line number>,<line number> <file name> // Shows who modified each line, optionally with emails or line ranges
+
+git tag <name> <commit id>                                // Creates a lightweight tag for a commit
+git tag -a <name> -m "<message>"                          // Creates an annotated tag with a message
+git tag                                                   // Lists all tags
+git tag -d <tag name>                                     // Deletes a tag
+
+git show / <tag name> / HEAD / HEAD~<number>/ HEAD~<number>:<file name> / HEAD~<number> --name-only / HEAD~<number> --name-status / HEAD~<number>:<file name> // Shows details for a commit, tag, or file
+
+____________________________________________________________________________________________________________________
+
+// General file system commands
+ls                                                        // Lists files and directories
+mv                                                        // Moves or renames files/directories
+rm                                                        // Removes files or directories
+cat <filename>                                            // Displays the contents of a file
+
+// Resource
+github.com/github/gitignore                               // Website with .gitignore templates for excluding files
+
+// Rebase actions
+// drop (delete commit), pick (include commit), edit (modify commit), reword (change message), squash/fixup (combine commits, keep or discard message)
